@@ -24,7 +24,7 @@ def enumerateur(racine):
 
 def datephoto(chemin):
     data=get_exif(chemin)
-    if not(data.has_key('DateTime')):
+    if 'DateTime' not in data:
         mois='00'
         annee='0000'
         return annee,mois
@@ -59,16 +59,16 @@ def get_exif(fn):
     return ret
 
 if __name__ == "__main__":
-    
+
     for dirname, dirnames, filenames in os.walk(source):
-        print dirname, dirnames , filenames
+        print (dirname, dirnames , filenames)
         for filename in filenames:
-            print filename
+            print(filename)
             (nom,extension)=os.path.splitext(filename)
             if os.path.normcase(extension)=='.JPG':
                 annee,mois = datephoto(os.path.join(dirname,filename))
                 nomdoss=choisirepertoire(annee,mois)
-                print nomdoss
+                print(nomdoss)
 
                 if not(os.path.exists(nomdoss)):
                     os.makedirs(nomdoss)
